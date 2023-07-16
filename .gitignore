@@ -13,6 +13,7 @@ client/*.local
 
 # server
 server/__pycache__
+server/app/__pycache__
 server/.env
 server/venv
 

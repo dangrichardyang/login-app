@@ -1,0 +1,40 @@
+version: "3"
+services:
+  login-client:
+    container_name: login-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - login-network
+    depends_on:
+      - login-server
+
+  login-server:
+    container_name: login-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server/app:/code/app
+    networks:
+      - login-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: login-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - login-server
+      - login-client
+    networks:
+      - login-network
+
+networks:
+  login-network:
