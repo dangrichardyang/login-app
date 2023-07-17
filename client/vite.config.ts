@@ -6,6 +6,7 @@ dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig({
   plugins: [react()],
+  base: "/login/",
   server: {
     host: true,
     port: 3000,

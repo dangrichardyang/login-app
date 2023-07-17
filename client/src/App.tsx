@@ -1,14 +1,19 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import axios from 'axios';
 
 function App() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(`username: ${username}, password: ${password}`)
+    try {
+      const res = await axios.get('/login/api/');
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   return (
